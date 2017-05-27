@@ -59,4 +59,36 @@ public class PilhaRestritaTest {
         }catch(PilhaCheiaException e){}
     }
     
+    @Test
+    public void testDesempilha() throws PilhaCheiaException, PilhaVaziaException{
+        //new
+        PilhaRestrita pilhaRestrita = new PilhaRestrita(4);
+        //empilha
+        pilhaRestrita.empilhar("s1");
+        //desempilha
+        pilhaRestrita.desempilhar();        
+        assertTrue(pilhaRestrita.vazia());
+    }
+    
+    @Test
+    public void testDesempilhaXmenos1() throws PilhaCheiaException, PilhaVaziaException{
+        //new
+        PilhaRestrita pilhaRestrita = new PilhaRestrita(4);
+        //empilha
+        pilhaRestrita.empilhar("s1");
+        //empilha(x-1)
+        for (int i = 0; i < 3; i++) {
+            pilhaRestrita.empilhar("s"+(i+2));
+        }
+        //empilha(x-1)
+        for (int i = 0; i < 3; i++) {
+            pilhaRestrita.desempilhar();
+        }        
+        //teste se tem 1 elemento
+        assertFalse(pilhaRestrita.vazia());
+        //desempilha
+        pilhaRestrita.desempilhar();
+        //como tinha 1 elemento agora esta vazia
+        assertTrue(pilhaRestrita.vazia());        
+    }    
 }
